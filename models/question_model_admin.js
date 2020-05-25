@@ -2,26 +2,25 @@
 var db=require('../dbconnection');
 var Question={
     getQuestions(tag_id,difficulty,count,limit,callback){
-       
+
         console.log(tag_id,difficulty,count,limit);
         let lim=Number(limit);
         return db.query("SELECT * FROM questions WHERE Tag_id=? and Difficulty=? and Count<=? ORDER BY RAND() LIMIT ?",[tag_id,difficulty,count,lim],callback);
     },
     getAllQuestion(callback)
     {
-        return db.query("Select * from questions",callback);
+        return db.query("Select t.*,q.* from questions q,tag t where t.Tag_id=q.Tag_id",callback);
     },
-
     getQuestionsById(Question_id,callback)
     {
-        return db.query("Select * from questions where Question_id=?",[Question_id],callback); 
+        return db.query("Select t.*,q.* from questions q,tag t where t.Tag_id=q.Tag_id and Question_id=?",[Question_id],callback);
     },
+
 
     getQuestionsByFaculty_Id(Faculty_id,callback)
     {
-        return db.query("Select * from questions where Faculty_id=?",[Faculty_id],callback); 
+        return db.query("Select t.*,q.* from questions q,tag t where t.Tag_id=q.Tag_id and Faculty_id=?",[Faculty_id],callback);
     },
-
     addQuestion(item,callback)
     {
         let x=Number(item.Count);
@@ -34,9 +33,9 @@ var Question={
 
     deleteQuestionByID(Question_id,callback)
     {
- 
+
         console.log(Question_id);
-     //   
+     //
         return db.query("delete from questions where Question_id=?",[Question_id],callback);
     },
     updateQuestions:function(Question_id,item,callback)

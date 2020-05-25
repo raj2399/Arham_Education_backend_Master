@@ -1,15 +1,14 @@
 var db=require('../dbconnection');
 var Batch={
-    getAllBatch(callback){
-        return db.query("select * from batch",callback);
-    },
- 
+  getAllBatch(callback){
+    return db.query("select * from batch where Batch_id!=0",callback);
+},
     getBatchById(Batch_id,callback){
         return db.query("select * from batch where Batch_id=?",[Batch_id],callback);
     },
     addBatch:function(item,callback){
         //console.log(item);
-        return db.query("insert into batch (Batch_name) values(?)",[item.Batch_name],callback);        
+        return db.query("insert into batch (Batch_name) values(?)",[item.Batch_name],callback);
     },
     updateBatch:function(Batch_id,item,callback){
         //console.log(item.Batch_name);

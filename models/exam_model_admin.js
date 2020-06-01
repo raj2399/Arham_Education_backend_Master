@@ -1,11 +1,19 @@
 var db=require('../dbconnection');
-var exam_date=new Date;
-exam_date=new Date(Date.now());
+
 var exam={
-    addExam(item,callback)
+  addExam(item,callback)
+  {
+      console.log(item);
+      var Exam_date=new Date(item.Date);
+      return db.query("insert into exam (Exam_name,Batch_id,Date,Marks,Time,Faculty_id) values (?,?,?,?,?,?)",[item.Exam_name,item.Batch_id,Exam_date,item.Marks,item.Time,item.Faculty_id],callback);
+  },
+    getNumberOfQuestionBytagId(tag_id,diff,callback)
     {
-     
-        return db.query("insert into exam (Exam_name,Batch_id,Date,Marks,Time,Faculty_id) values (?,?,?,?,?,?)",[item.Exam_name,item.Batch_id,exam_date,item.Marks,item.Time,item.Faculty_id],callback);
+        return db.query("select count(*)'count' from questions where Tag_id=? and Difficulty=?",[tag_id,diff],callback);
+    },
+    getNumberOfQuestionBySubjectId(sub_id,callback)
+    {
+        return db.query("SELECT count(*)'Count' FROM `questions` WHERE Tag_id in ( SELECT Tag_id FROM `tag` WHERE Subject_id=? )",[sub_id],callback);
     },
     getAllExam(callback)
     {

@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var batchRouter = require('./routes/batch_routes');
 var subjectRouter = require('./routes/subject_routes');
 var tagRouter = require('./routes/tag_routes');
+var batchresult=require('./models/result_batchwise_admin');
 var questionRouter = require('./routes/question_router');
 var examRouter = require('./routes/exam_routes');
 var examRouter1 = require('./routes/exam_routes1');
@@ -26,7 +27,7 @@ var attendence_Router=require('./routes/attendence_routes');
 var announcement_Router=require('./routes/announcement_routes');
 var email_Router=require('./routes/email_routes');
 var student_Router1=require('./routes/student_routes1');
-
+var viewQuestionPaper=require('./routes/question_paperView_routes_admin');
 var attendanceRouter_admin=require('./routes/attendance_routes_admin');
 var barchart1Router_admin=require('./routes/barchart1_routes_admin');
 var barchart2Router_admin=require('./routes/barchat2_routes_admin');
@@ -64,7 +65,7 @@ var dashboardfaculty_admin=require('./routes/dashboard_faculty_routes_admin');
 var dashboardbatch_admin=require('./routes/dashboard_batch_routes_admin');
 var dashboardperformace_admin=require('./routes/dashboard_performance_routes_admin');
 var linechart_admin=require('./routes/linechart_routes_admin');
-
+var status_date=require('./routes/attendence_status_routes');
 
 
 var app = express();
@@ -86,9 +87,12 @@ app.use('/users', usersRouter);
 app.use('/batch',batchRouter);
 app.use('/subject',subjectRouter);
 app.use('/tag',tagRouter);
+app.use('/status',status_date);
+app.use('/batch_result',batchresult);
 app.use('/question',questionRouter);
 app.use('/question1',questionRouter1);
 app.use('/question2',questionRouter2);
+app.use('/viewQuestionPaper',viewQuestionPaper);
 app.use('/exam',examRouter);
 app.use('/exam1',examRouter1);
 app.use('/exam2',examRouter2);

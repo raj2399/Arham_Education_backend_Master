@@ -1,6 +1,4 @@
 var db=require('../dbconnection');
-var date=Date;
-date=new Date(date.now());
 
 var fees={
     getAlltransaction:function(callback)
@@ -15,6 +13,9 @@ var fees={
 
     addFees:function(item,callback)
     {
+      var date=Date;
+date=new Date(date.now());
+
         return db.query("insert into fees (Student_id,Paid_amount,Date) values(?,?,?)",[item.Student_id,item.Paid_amount,date],callback);
     },
 
@@ -25,11 +26,15 @@ var fees={
 
     addSalary(item,callback)
     {
+
+      var date=Date;
+date=new Date(date.now());
+
         console.log(item);
-        return db.query("insert into salary (Faculty_id,Paid_amount,Date) values(?,?,?)",[item.Faculty_id,item.Paid_amount,date],callback);       
+        return db.query("insert into salary (Faculty_id,Paid_amount,Date) values(?,?,?)",[item.Faculty_id,item.Paid_amount,date],callback);
     }
-   
-  
+
+
 
 }
 module.exports=fees;

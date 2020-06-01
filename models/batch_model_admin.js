@@ -29,6 +29,11 @@ var Batch={
          db.query("delete from batch where Batch_id in (?)",[delarr],callback);
     },
 
+    BatchResult:function(Exam_id,callback)
+    {
+        return db.query("select se.*,e.*,r.*,s.Name,s.Last_name from student_exam se,exam e,result r,student s where se.Exam_id=? and e.Exam_id=se.Exam_id and r.Student_exam_id=se.Student_exam_id and s.Student_id=se.Student_id",[Exam_id],callback);
+    },
+
 
 
 }

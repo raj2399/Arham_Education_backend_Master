@@ -16,6 +16,38 @@ router.post('/',function(req,res,next){
     });
 });
 
+router.get('/getCount/:subid',function(req,res,next){
+  exam.getNumberOfQuestionBySubjectId(req.params.subid,function(err,rows){
+      if(err)
+      {
+          res.json(err);
+      }
+      else
+      {
+          res.json(rows);
+      }
+  })
+})
+
+
+router.get('/getCount/:tagid/:diff',function(req,res,next){
+  exam.getNumberOfQuestionBytagId(req.params.tagid,req.params.diff,function(err,rows){
+      if(err)
+      {
+          res.json(err);
+      }
+      else
+      {
+          res.json(rows);
+      }
+  })
+})
+
+
+
+
+
+
 router.get('/:?id',function(req,res,next){
     if(req.params.id)
     {
@@ -43,6 +75,6 @@ router.get('/:?id',function(req,res,next){
             }
         });
     }
-    
+
 })
 module.exports=router;

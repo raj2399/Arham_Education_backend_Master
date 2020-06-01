@@ -1,13 +1,10 @@
 var db=require('../dbconnection');
-var Date1=Date;
-Date1=new Date(Date1.now());
-
 
 var faculty={
     Facultylogin(item,callback)
     {
         return db.query("select * from faculty where Email_id=? and Password=?",[item.Email_id,item.Password],callback);
-    }, 
+    },
     changePassword(item,callback)
     {
         return db.query("update faculty set Password=? where Email_id=?",[item.Password,item.Email_id],callback);
@@ -36,7 +33,7 @@ var faculty={
     updateFacultyByFacultyId:function(Faculty_id,item,callback){
         //console.log(item);
         var date=new Date(item.Date_of_birth);
-       
+
         return db.query("update faculty set Name=?,Mobile_no=?,Email_id=?,Password=?,Date_of_birth=?,Salary=?,Qualification=?,Role=? where Faculty_id=?",[item.Name,item.Mobile_no,item.Email_id,item.Password,date,item.Salary,item.Qualification,item.Role,Faculty_id],callback);
     },
     deleteFaculty:function(Faculty_id,callback)
@@ -57,7 +54,7 @@ var faculty={
     {
         return db.query("select * from salary where Faculty_id=? ORDER BY Date DESC LIMIT 1",[Faculty_id],callback);
     }
-   
+
 
 }
 
